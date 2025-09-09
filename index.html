@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Article Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">📚 Educational Article Generator</h1>
+                <p class="header-subtitle">Create comprehensive educational content with AI assistance</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Generate Educational Content</h2>
+                        <p class="text-secondary">Fill in the details to create your customized educational article</p>
+                    </div>
+                    <div class="card__body">
+                        <form id="articleForm" class="article-form">
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="topic" class="form-label">Topic / Syllabus Outline</label>
+                                    <textarea id="topic" class="form-control" rows="3" placeholder="Enter your topic, syllabus outline, or keywords (e.g., Introduction to Machine Learning, supervised learning, algorithms)"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="subject" class="form-label">Subject Area</label>
+                                    <select id="subject" class="form-control">
+                                        <option value="">Select Subject</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="Biology">Biology</option>
+                                        <option value="History">History</option>
+                                        <option value="Literature">Literature</option>
+                                        <option value="Economics">Economics</option>
+                                        <option value="Psychology">Psychology</option>
+                                        <option value="Engineering">Engineering</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="level" class="form-label">Target Audience Level</label>
+                                    <select id="level" class="form-control">
+                                        <option value="">Select Level</option>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Advanced">Advanced</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contentType" class="form-label">Content Type</label>
+                                    <select id="contentType" class="form-control">
+                                        <option value="">Select Content Type</option>
+                                        <option value="Blog Post">Blog Post</option>
+                                        <option value="Study Guide">Study Guide</option>
+                                        <option value="Tutorial">Tutorial</option>
+                                        <option value="Reference Material">Reference Material</option>
+                                        <option value="Lesson Plan">Lesson Plan</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="length" class="form-label">Desired Length</label>
+                                    <select id="length" class="form-control">
+                                        <option value="">Select Length</option>
+                                        <option value="Short">Short (500-800 words)</option>
+                                        <option value="Medium">Medium (800-1500 words)</option>
+                                        <option value="Long">Long (1500+ words)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" id="sampleBtn" class="btn btn--secondary">Load Sample</button>
+                                <button type="submit" id="generateBtn" class="btn btn--primary">Generate Article</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Tools Panel -->
+            <section class="ai-tools-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Powered by Advanced AI</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="ai-tools-grid" id="aiToolsGrid">
+                            <!-- AI tools will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Animation -->
+            <div class="loading-section hidden" id="loadingSection">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="loading-animation">
+                            <div class="loading-spinner"></div>
+                            <h3>Generating Your Educational Content...</h3>
+                            <p class="loading-text" id="loadingText">Analyzing your topic and requirements</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Content Display -->
+            <section class="content-display-section hidden" id="contentDisplaySection">
+                <div class="card">
+                    <div class="card__header">
+                        <div class="content-header">
+                            <div class="content-meta">
+                                <h2 id="generatedTitle">Generated Article</h2>
+                                <div class="article-meta">
+                                    <span id="wordCount" class="meta-item">0 words</span>
+                                    <span id="readingTime" class="meta-item">0 min read</span>
+                                </div>
+                            </div>
+                            <div class="content-actions">
+                                <button type="button" class="btn btn--outline btn--sm" id="searchBtn">🔍 Search</button>
+                                <button type="button" class="btn btn--outline btn--sm" id="copyBtn">📋 Copy</button>
+                                <button type="button" class="btn btn--outline btn--sm" id="downloadBtn">📄 PDF</button>
+                                <button type="button" class="btn btn--outline btn--sm" id="markdownBtn">⬇ Markdown</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="search-container hidden" id="searchContainer">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search within content...">
+                        </div>
+                    </div>
+                    
+                    <div class="card__body">
+                        <div class="content-display" id="generatedContent">
+                            <!-- Generated content will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sample Topics -->
+            <section class="sample-topics-section">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Sample Topics</h3>
+                        <p class="text-secondary">Try these example topics to get started</p>
+                    </div>
+                    <div class="card__body">
+                        <div class="sample-topics-grid" id="sampleTopicsGrid">
+                            <!-- Sample topics will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Educational Article Generator. Empowering learning with AI.</p>
+        </footer>
+    </div>
+
+    <!-- Success Message -->
+    <div class="toast hidden" id="successToast">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <span class="toast-message" id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
